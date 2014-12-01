@@ -14,7 +14,7 @@ import vehiclesurvey.model.Vehicle;
 public class Processor {
     
     private ArrayList <ReadingPoint> pointList;
-    private HashMap<String, Vehicle> resultHash;
+    private HashMap<String, Vehicle[]> resultHash;
     
     public Processor(ArrayList points) {
         pointList = points;
@@ -25,16 +25,28 @@ public class Processor {
         resultHash = new HashMap<>();
         ListIterator<ReadingPoint> iterator = pointList.listIterator();
         ReadingPoint previousPoint = null;
-        ReadingPoint point;
+        ReadingPoint point = null;
+        ArrayList<Vehicle> straightVehicles = null;
+         ArrayList<Vehicle> oppositeVehicles = null;
         while(iterator.hasNext()) {
-                        
-            if(previousPoint== null && pointList.listIterator().hasPrevious()) {
-               previousPoint  = iterator.previous();
+            
+            
+            if(previousPoint == null && point != null) {
+               previousPoint  = point;
             } 
             point = iterator.next();
             
+             System.out.println(point.sensor.name);
+             
             if(previousPoint!= null && previousPoint.sensor.name.equals(point.sensor.name)) {
+                Vehicle vehicle = new Vehicle(point, previousPoint);
+                
+                straightVehicles.add(vehicle);
+                
+                // Resetting previous entry
                 previousPoint = null;
+            } else if (previousPoint!= null) {
+                System.out.println(previousPoint.sensor.name.equals(point.sensor.name));
             }
         }
     }
