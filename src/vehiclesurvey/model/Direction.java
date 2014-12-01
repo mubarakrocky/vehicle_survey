@@ -10,4 +10,15 @@ package vehiclesurvey.model;
  */
 public class Direction {
     
+    private String directionIdentifier;
+    
+    public Direction(String identifier) {
+        this.directionIdentifier = identifier;
+    }
+    
+    public String getDirectionIdentifier() {
+        return this.directionIdentifier;
+    }
+            
+    
 }

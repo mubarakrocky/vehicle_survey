@@ -16,10 +16,10 @@ import org.junit.Test;
  *
  * @author mubarak
  */
-public class ProcessorTest {
+public class DataProcessorTest {
     private DataReader dataReader;
     
-    public ProcessorTest() {
+    public DataProcessorTest() {
     }
     
     @BeforeClass
@@ -42,13 +42,13 @@ public class ProcessorTest {
    
     @Test
     public void testConstructor() {
-        Processor processor = new Processor(dataReader.pointList);
+        DataProcessor processor = new DataProcessor(dataReader.pointList);
         assertTrue("The object should be initiated", processor != null);
     }
     
     @Test
     public void testProcess() {
-        Processor processor = new Processor(dataReader.pointList);
+        DataProcessor processor = new DataProcessor(dataReader.pointList);
         processor.process();
     }
 }

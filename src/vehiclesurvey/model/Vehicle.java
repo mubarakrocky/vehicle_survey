@@ -13,7 +13,19 @@ public class Vehicle {
     private double speed;
     private ReadingPoint firstReading;
     private ReadingPoint secondReading;
+    private Direction direction;
+    
 
+    public Vehicle(ReadingPoint firstReading, ReadingPoint secondReading, Direction vehicleDirection) {
+        
+        this.firstReading   = firstReading;
+        this.secondReading  = secondReading;
+        this.direction = vehicleDirection;
+        
+        // Setting vehicle speed
+        this.setSpeed();
+    }
+    
     public Vehicle(ReadingPoint firstReading, ReadingPoint secondReading) {
         
         this.firstReading   = firstReading;
@@ -33,6 +45,10 @@ public class Vehicle {
         int timeDelay = secondReading.timeSegment - firstReading.timeSegment;
         
         this.speed = Vehicle.vehicleSpeed(timeDelay);
+    }
+    
+    public String getDirection() {
+        return this.direction.getDirectionIdentifier();
     }
     
     public static double vehicleSpeed(int delay) {

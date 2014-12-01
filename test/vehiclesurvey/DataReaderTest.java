@@ -36,7 +36,7 @@ public class DataReaderTest {
     
     @Test 
     public void testRead() throws FileNotFoundException {
-        DataReader dataReader = new DataReader((System.getProperty( "basedir", "." ) + "/test/sample_data.txt" ));
+        DataReader dataReader = new DataReader((System.getProperty( "basedir", "." ) + "/test/sample_data1.txt" ));
         
         dataReader.read();
 
