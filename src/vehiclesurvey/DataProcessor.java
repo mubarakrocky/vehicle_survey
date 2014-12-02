@@ -1,9 +1,6 @@
 package vehiclesurvey;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.ListIterator;
 import vehiclesurvey.model.Direction;
 import vehiclesurvey.model.ReadingPoint;
@@ -58,7 +55,7 @@ public class DataProcessor {
                     backWheelReading = nextReading;
                     loopDecider = false;
                 } else if (frontWheelReading != null) {
-                    System.out.print("Found opposite direction");
+                    //Found opposite direction
                     vehicleDirection = new Direction("SOUTH");
                     continue;
                 } else {

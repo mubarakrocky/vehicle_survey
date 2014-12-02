@@ -5,12 +5,16 @@
 package vehiclesurvey;
 
 import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ListIterator;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import vehiclesurvey.model.ReadingPoint;
 
 /**
  *
@@ -51,4 +55,5 @@ public class DataProcessorTest {
         DataProcessor processor = new DataProcessor(dataReader.pointList);
         processor.process();
     }
+   
 }
