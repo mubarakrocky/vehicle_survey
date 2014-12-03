@@ -53,7 +53,7 @@ public class ResultTest {
     
     @Test
     public void testPrint() throws FileNotFoundException {
-        DataReader dataReader = new DataReader((System.getProperty( "basedir", "." ) + "/test/sample_data.txt" ));
+        DataReader dataReader = new DataReader((System.getProperty( "basedir", "." ) + "/test/sample_data1.txt" ));
         dataReader.read();
 
         

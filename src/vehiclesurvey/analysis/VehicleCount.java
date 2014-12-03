@@ -15,9 +15,9 @@ public class VehicleCount extends Insight {
     
     
     private TreeMap<String, HashMap<String, Integer>> perHourCounter = new TreeMap<>();
-    private HashMap<String, HashMap<String, Integer>> perHalfHourCounter = new HashMap<>();
-    private HashMap<String, HashMap<String, Integer>> perTwentyMinuteCounter = new HashMap<>();
-    private HashMap<String, HashMap<String, Integer>> perFifteenMinuteCounter = new HashMap<>();
+    private TreeMap<String, HashMap<String, Integer>> perHalfHourCounter = new TreeMap<>();
+    private TreeMap<String, HashMap<String, Integer>> perTwentyMinuteCounter = new TreeMap<>();
+    private TreeMap<String, HashMap<String, Integer>> perFifteenMinuteCounter = new TreeMap<>();
     
     @Override
     public void printHeader() {
@@ -26,51 +26,38 @@ public class VehicleCount extends Insight {
 
     @Override
     public void printResult() {
+        // Initiate the maps
         this.buildResultMaps();
+        // Make the result
         this.makeResultList();
-        
-        System.out.println("Count per hour");
-        Iterator it = perHourCounter.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pairs = (Map.Entry)it.next();
-            System.out.println(pairs.getKey() + " = " + pairs.getValue());
-            
-        }
-        
-        System.out.println("Per half hour");
-        Iterator it2 = perHalfHourCounter.entrySet().iterator();
-        while (it2.hasNext()) {
-            Map.Entry pairs = (Map.Entry)it.next();
-            System.out.println(pairs.getKey() + " = " + pairs.getValue());
-            
-        }
+          
+        this.printFormatedForPerHour("Vehicle Count Per Hour", perHourCounter);
+        this.printFormatedForPerHour("Vehicle Count Per Half Hour", perHalfHourCounter);
+        this.printFormatedForPerHour("Vehicle Count Per 20 Minute", perTwentyMinuteCounter);
+        this.printFormatedForPerHour("Vehicle Count Per 15 Minute", perFifteenMinuteCounter);
     }
     
     
     private void makeResultList() {
         System.out.print(this.vehicles.size());
         for(int i=0; i < this.vehicles.size(); i++) {
-            System.out.println(this.vehicles.get(i).getDirection());
-            System.out.println(this.vehicles.get(i).getSpeed());
-            System.out.println(this.vehicles.get(i).getFirstReading().getTimeRecordedAt().get(Calendar.HOUR_OF_DAY));
             
             Vehicle vehicle = this.vehicles.get(i);
             int hourReaded = vehicle.getFirstReading().getTimeRecordedAt().get(Calendar.HOUR_OF_DAY);
             
             int minutesReaded = vehicle.getFirstReading().getTimeRecordedAt().get(Calendar.MINUTE);
             
-            // Increment hourly count
-            HashMap<String, Integer> hourHash = perHourCounter.get(String.format("%02d:00", hourReaded));
+            // increment per hour count
+            this.incrementCounter(String.format("%02d:00", hourReaded), vehicle.getDirection(), perHourCounter);
             
-            hourHash.put(vehicle.getDirection(), hourHash.get(vehicle.getDirection())+1);
-            perHourCounter.put(String.format("%02d:00", hourReaded), hourHash);
+            // increment per half hour count
+            this.incrementCounter(String.format("%02d:%02d", hourReaded, (minutesReaded/30)*30), vehicle.getDirection(), perHalfHourCounter);
             
-            // Increment 30 minute count
-            HashMap<String, Integer> halfHourHash = perHalfHourCounter.get(String.format("%02d:%02d", hourReaded, (minutesReaded/30)*30));
+            // increment 20 minute count
+            this.incrementCounter(String.format("%02d:%02d", hourReaded, (minutesReaded/20)*20), vehicle.getDirection(), perTwentyMinuteCounter);
             
-            halfHourHash.put(vehicle.getDirection(), halfHourHash.get(vehicle.getDirection())+1);
-            perHalfHourCounter.put(String.format("%02d:%02d", hourReaded, (minutesReaded/30)*30), halfHourHash);
-            
+            // Increment 15 minute count
+            this.incrementCounter(String.format("%02d:%02d", hourReaded, (minutesReaded/15)*15), vehicle.getDirection(), perFifteenMinuteCounter);
         }
     }
 
@@ -80,8 +67,6 @@ public class VehicleCount extends Insight {
     }
     
     private void buildResultMaps() {
-        
-        
         
         // Map the per hour data
         for(int i = 0; i < 24; i++) {
@@ -97,14 +82,36 @@ public class VehicleCount extends Insight {
         }
         
         for(int i = 0; i < 96; i++) {
-            perFifteenMinuteCounter.put(String.format("%02d:%02d", i/3, (i%3)*15), getHashForDirection());
+            perFifteenMinuteCounter.put(String.format("%02d:%02d", i/4, (i%4)*15), getHashForDirection());
         }
     }
     
+    // Create has for direction key
     private HashMap<String, Integer> getHashForDirection() {
         HashMap<String, Integer> directionHash = new HashMap<>();
         directionHash.put("NORTH", 0);
         directionHash.put("SOUTH", 0);
         return directionHash;
+    }
+    
+    private void incrementCounter(String key, String direction, TreeMap<String, HashMap<String, Integer>> resultHash) {
+        // Increment 30 minute count
+        HashMap<String, Integer> hashValue = resultHash.get(key);
+        hashValue.put(direction, hashValue.get(direction)+1);
+    }
+    
+    private void printFormatedForPerHour(String header, TreeMap<String, HashMap<String, Integer>> resultHash) {
+        System.out.println("");
+        System.out.println("-------"+header+"---------");
+        System.out.println("Hour\t|\t SOUTH\t|\t NORTH");
+        
+        Iterator hashIterator = resultHash.entrySet().iterator();
+        while (hashIterator.hasNext()) {
+            Map.Entry pairs = (Map.Entry) hashIterator.next();
+            
+            HashMap<String, Integer> hashValue = (HashMap<String, Integer>) pairs.getValue();
+            System.out.println(pairs.getKey() + "\t|\t " + hashValue.get("SOUTH") + "\t|\t "+hashValue.get("NORTH"));
+        }
+        System.out.println("");
     }
 }
