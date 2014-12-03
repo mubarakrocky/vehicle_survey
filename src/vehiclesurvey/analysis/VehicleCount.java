@@ -66,13 +66,10 @@ public class VehicleCount extends Insight {
             perHourCounter.put(String.format("%02d:00", hourReaded), hourHash);
             
             // Increment 30 minute count
-            
             HashMap<String, Integer> halfHourHash = perHalfHourCounter.get(String.format("%02d:%02d", hourReaded, (minutesReaded/30)*30));
-            System.out.println(perHalfHourCounter.keySet());
-            System.out.println(halfHourHash);
-            System.out.println(String.format("%02d:%02d", hourReaded, minutesReaded/2));
+            
             halfHourHash.put(vehicle.getDirection(), halfHourHash.get(vehicle.getDirection())+1);
-            perHalfHourCounter.put(String.format("%02d:%02d", hourReaded, minutesReaded/2), halfHourHash);
+            perHalfHourCounter.put(String.format("%02d:%02d", hourReaded, (minutesReaded/30)*30), halfHourHash);
             
         }
     }
