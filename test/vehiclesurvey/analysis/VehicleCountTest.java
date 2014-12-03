@@ -1,10 +1,10 @@
-
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package vehiclesurvey.analysis;
 
 import java.io.FileNotFoundException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -13,15 +13,14 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import vehiclesurvey.DataReader;
 
-import vehiclesurvey.model.Vehicle;
-
 /**
  *
  * @author mubarak
  */
-public class ResultTest {
+public class VehicleCountTest {
     
-    
+    public VehicleCountTest() {
+    }
     
     @BeforeClass
     public static void setUpClass() {
@@ -30,8 +29,7 @@ public class ResultTest {
     @AfterClass
     public static void tearDownClass() {
     }
-
-        
+    
     @Before
     public void setUp() {
     }
@@ -40,20 +38,7 @@ public class ResultTest {
     public void tearDown() {
     }
     
-    @Test
-    public void testConstructor() throws FileNotFoundException {     
-        
-        DataReader dataReader = new DataReader((System.getProperty( "basedir", "." ) + "/test/sample_data.txt" ));
-        dataReader.read();
-
-        
-        // Result should accept the day vise vehicle list
-        
-        Result result = new Result(dataReader.dayViseVehicles);
-    }
-    
-    @Test
-    public void testPrint() throws FileNotFoundException {
+    public void makeResultList() throws FileNotFoundException {
         DataReader dataReader = new DataReader((System.getProperty( "basedir", "." ) + "/test/sample_data1.txt" ));
         dataReader.read();
 
@@ -61,8 +46,5 @@ public class ResultTest {
         // Result should accept the day vise vehicle list
         
         Result result = new Result(dataReader.dayViseVehicles);
-        result.print();
     }
-     
-    
 }

@@ -11,13 +11,12 @@ import vehiclesurvey.model.Vehicle;
 
 
 public class VehicleCount extends Insight {
-    private ArrayList<Vehicle> vehicles;
+    public ArrayList<Vehicle> vehicles;
     
-    
-    private TreeMap<String, HashMap<String, Integer>> perHourCounter = new TreeMap<>();
-    private TreeMap<String, HashMap<String, Integer>> perHalfHourCounter = new TreeMap<>();
-    private TreeMap<String, HashMap<String, Integer>> perTwentyMinuteCounter = new TreeMap<>();
-    private TreeMap<String, HashMap<String, Integer>> perFifteenMinuteCounter = new TreeMap<>();
+    public TreeMap<String, HashMap<String, Integer>> perHourCounter = new TreeMap<>();
+    public TreeMap<String, HashMap<String, Integer>> perHalfHourCounter = new TreeMap<>();
+    public TreeMap<String, HashMap<String, Integer>> perTwentyMinuteCounter = new TreeMap<>();
+    public TreeMap<String, HashMap<String, Integer>> perFifteenMinuteCounter = new TreeMap<>();
     
     @Override
     public void printHeader() {
@@ -38,8 +37,8 @@ public class VehicleCount extends Insight {
     }
     
     
-    private void makeResultList() {
-        System.out.print(this.vehicles.size());
+    public void makeResultList() {
+        
         for(int i=0; i < this.vehicles.size(); i++) {
             
             Vehicle vehicle = this.vehicles.get(i);
@@ -66,7 +65,7 @@ public class VehicleCount extends Insight {
         this.vehicles = vehicles;
     }
     
-    private void buildResultMaps() {
+    public void buildResultMaps() {
         
         // Map the per hour data
         for(int i = 0; i < 24; i++) {

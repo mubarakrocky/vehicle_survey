@@ -18,7 +18,7 @@ public abstract class Insight {
     
     public abstract void printResult();
     
-    private void printLine() {
+    public void printLine() {
         System.out.print("----------------------------------------------------------");
     }
     

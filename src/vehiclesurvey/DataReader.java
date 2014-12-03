@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.DataFormatException;
@@ -21,12 +21,12 @@ public class DataReader  {
     private final BufferedReader bufferReader;
     public ArrayList<ReadingPoint> pointList;
     
-    public HashMap<String, ArrayList<Vehicle>> dayViseVehicles;
+    public TreeMap<String, ArrayList<Vehicle>> dayViseVehicles;
 
     public DataReader(String fileName) throws FileNotFoundException {
         bufferReader = new BufferedReader(new FileReader(fileName));
         pointList = new ArrayList<>();
-        dayViseVehicles = new HashMap<>();
+        dayViseVehicles = new TreeMap<>();
     }
     
     public void read() {
