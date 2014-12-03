@@ -40,6 +40,10 @@ public class Vehicle {
         return speed;
     }
     
+    public ReadingPoint getFirstReading() {
+        return this.firstReading;
+    }
+    
     private void setSpeed() {
         
         int timeDelay = secondReading.timeSegment - firstReading.timeSegment;

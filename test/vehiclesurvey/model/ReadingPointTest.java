@@ -3,6 +3,7 @@ package vehiclesurvey.model;
 
 import java.lang.reflect.Method;
 import java.sql.Time;
+import java.util.Calendar;
 import java.util.zip.DataFormatException;
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -53,17 +54,16 @@ public class ReadingPointTest {
     
     @Test
     public void getTimeRecordedAt() {
+        Calendar expectedTime = null;
         
-        Time expectedTime = new Time(0);
         try{
             ReadingPoint readingPoint = new ReadingPoint("A268981");
-            
             expectedTime = readingPoint.getTimeRecordedAt();
         } catch(Exception ex) {
             System.out.println(ex.getMessage());
         }
     
-        assertEquals("1 Jan 1970 00:04:28 GMT", expectedTime.toGMTString());
+        assertEquals(0, expectedTime.get(Calendar.HOUR));
     }
     
     @Test
@@ -76,7 +76,7 @@ public class ReadingPointTest {
             method.setAccessible(true);
             method.invoke(readingPoint);
             
-            assertEquals("1 Jan 1970 00:00:00 GMT", readingPoint.getTimeRecordedAt().toGMTString());
+            assertEquals(0, readingPoint.getTimeRecordedAt().get(Calendar.HOUR));
             
         } catch(Exception ex) {
             System.out.println(ex.getMessage());

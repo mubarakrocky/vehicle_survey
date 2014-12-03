@@ -13,19 +13,15 @@ import vehiclesurvey.model.Vehicle;
  */
 public abstract class Insight {
     
-    private ArrayList<Vehicle> vehicles;
     
     public abstract void printHeader();
     
     public abstract void printResult();
     
-    
     private void printLine() {
         System.out.print("----------------------------------------------------------");
     }
     
-    public void setVehiclesList(ArrayList<Vehicle> vehicles) {
-        this.vehicles = vehicles;
-    }
-   
+    public abstract void setVehiclesList(ArrayList<Vehicle> vehicles);
+    
 }

@@ -34,6 +34,7 @@ public class Result {
             VehicleCount vehicleCount = new VehicleCount();
             vehicleCount.setVehiclesList(vehicleHash.get(daysList[i]));
             vehicleCount.printHeader();
+            vehicleCount.printResult();
             System.out.print(i);
         }
     }

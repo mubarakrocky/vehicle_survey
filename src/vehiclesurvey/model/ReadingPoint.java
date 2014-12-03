@@ -2,6 +2,9 @@
 package vehiclesurvey.model;
 
 import java.sql.Time;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 import java.util.zip.DataFormatException;
 
 /**
@@ -15,6 +18,7 @@ public class ReadingPoint {
     
     public Sensor sensor;
     public int timeSegment;
+    private Calendar calendar;
     
     
     public ReadingPoint(String value) throws DataFormatException {
@@ -30,8 +34,8 @@ public class ReadingPoint {
         this.setTimeRecordedAt();
     }
     
-    public Time getTimeRecordedAt() {
-        return timeRecordedAt;
+    public Calendar getTimeRecordedAt() {
+        return calendar;
     }
     
     private void splitSensorAndTimeFromRecordedValue() {
@@ -45,7 +49,11 @@ public class ReadingPoint {
 
     }
     
-    private void setTimeRecordedAt() {
-        timeRecordedAt = new Time(timeSegment);
+    private Calendar setTimeRecordedAt() {
+        Date date = new Date(timeSegment);
+        calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return calendar;
     }
 }
