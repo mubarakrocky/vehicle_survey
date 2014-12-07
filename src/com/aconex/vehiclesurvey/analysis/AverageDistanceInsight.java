@@ -14,7 +14,7 @@ import java.util.TreeMap;
 public class AverageDistanceInsight extends AverageSpeedInsight {
     @Override
     public void printHeader() {
-        System.out.println("\n\nShowing average distance between cars per hour");
+        System.out.println("\n\nShowing average distance in meters between cars per hour");
     }
 
     @Override
@@ -54,8 +54,13 @@ public class AverageDistanceInsight extends AverageSpeedInsight {
             
             if (previousVehicle != null) {
                 int timeDifference = vehicle.getFirstReading().timeSegment - previousVehicle.getFirstReading().timeSegment;
-                System.out.println(timeDifference);
-                double distance = speed * timeDifference * (1/3600000.0);
+                
+                if (timeDifference < 0) {
+                    // New day just skip
+                    continue;
+                }
+                // Distance in meters
+                double distance = speed * timeDifference * (1/3600.0);
                 Double oldDistance = averageDisatnce.get(key);
                 double disatnceSum = Math.abs(distance) + oldDistance;
                 averageDisatnce.put(key, disatnceSum);
@@ -63,17 +68,20 @@ public class AverageDistanceInsight extends AverageSpeedInsight {
                 Integer prevoiusCounter = counter.get(key);
                 int incrementedCounter = prevoiusCounter + 1;
                 counter.put(key, incrementedCounter);
-            }
+                
+             }
             
             previousVehicle = vehicle;
         }
         // Finding average
         for(int i = 0; i < 24; i++) {
+            
             String key = String.format("%02d:00", i);
             Double totalDistance = averageDisatnce.get(key);
             Integer totalCount = counter.get(key);
+            
             if(totalCount > 0){
-                averageDisatnce.put(key, (totalDistance/totalCount));
+                averageDisatnce.put(key, totalDistance/totalCount);
                 
             }
            

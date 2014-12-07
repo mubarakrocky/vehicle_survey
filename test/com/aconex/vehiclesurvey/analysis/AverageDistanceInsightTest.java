@@ -44,8 +44,8 @@ public class AverageDistanceInsightTest {
         // The time gap between first vehicle and second vehicle is 50 ms and second vehicles speed is 60kmh
         // and the time difference is 300ms
         // So the distance between them is speed * time = 60 * 300 * (1/3600000)
-        // Which is 0.005 km
+        // Which is 5 m
         System.out.println();
-        assertEquals(0.005, results.get("00:00"), 0.001);
+        assertEquals(5, results.get("00:00"), 0.001);
      }
 }

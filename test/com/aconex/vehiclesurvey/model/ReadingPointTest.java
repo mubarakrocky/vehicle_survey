@@ -32,9 +32,8 @@ public class ReadingPointTest {
         String sensorName = "";
         try{
             ReadingPoint readingPoint = new ReadingPoint("A22345568");
-            Class readingPointClass = Class.forName("vehiclesurvey.model.ReadingPoint");
             
-            Method method = readingPointClass.getDeclaredMethod("splitSensorAndTimeFromRecordedValue");
+            Method method = readingPoint.getClass().getDeclaredMethod("splitSensorAndTimeFromRecordedValue");
             method.setAccessible(true);
             method.invoke(readingPoint);
             
@@ -42,6 +41,7 @@ public class ReadingPointTest {
             sensorName  = readingPoint.sensor.name;
             
         } catch(Exception ex) {
+            ex.printStackTrace();
             System.out.println(ex.getMessage());
         }
         // The time part should be 22345568
@@ -59,6 +59,7 @@ public class ReadingPointTest {
             ReadingPoint readingPoint = new ReadingPoint("A268981");
             expectedTime = readingPoint.getTimeRecordedAt();
         } catch(Exception ex) {
+            ex.printStackTrace();
             System.out.println(ex.getMessage());
         }
     
@@ -69,9 +70,8 @@ public class ReadingPointTest {
     public void setTimeRecordedAt() {
         try{
             ReadingPoint readingPoint = new ReadingPoint("A0");
-            Class readingPointClass = Class.forName("vehiclesurvey.model.ReadingPoint");
             
-            Method method = readingPointClass.getDeclaredMethod("setTimeRecordedAt");
+            Method method = readingPoint.getClass().getDeclaredMethod("setTimeRecordedAt");
             method.setAccessible(true);
             method.invoke(readingPoint);
             
