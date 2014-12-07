@@ -1,11 +1,11 @@
 
 package com.aconex.vehiclesurvey.analysis;
 
+import com.aconex.vehiclesurvey.model.Vehicle;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.TreeMap;
-import com.aconex.vehiclesurvey.model.Vehicle;
 
 /**
  *
@@ -54,15 +54,16 @@ public class AverageDistanceInsight extends AverageSpeedInsight {
             
             if (previousVehicle != null) {
                 int timeDifference = vehicle.getFirstReading().timeSegment - previousVehicle.getFirstReading().timeSegment;
-                double distance = speed * (timeDifference/(1000.0*60*60));
+                System.out.println(timeDifference);
+                double distance = speed * timeDifference * (1/3600000.0);
                 Double oldDistance = averageDisatnce.get(key);
                 double disatnceSum = Math.abs(distance) + oldDistance;
                 averageDisatnce.put(key, disatnceSum);
+                
+                Integer prevoiusCounter = counter.get(key);
+                int incrementedCounter = prevoiusCounter + 1;
+                counter.put(key, incrementedCounter);
             }
-            
-            Integer prevoiusCounter = counter.get(key);
-            int incrementedCounter = prevoiusCounter + 1;
-            counter.put(key, incrementedCounter);
             
             previousVehicle = vehicle;
         }
@@ -72,7 +73,7 @@ public class AverageDistanceInsight extends AverageSpeedInsight {
             Double totalDistance = averageDisatnce.get(key);
             Integer totalCount = counter.get(key);
             if(totalCount > 0){
-                averageDisatnce.put(key, totalDistance/totalCount);
+                averageDisatnce.put(key, (totalDistance/totalCount));
                 
             }
            

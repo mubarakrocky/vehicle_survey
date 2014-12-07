@@ -1,15 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.aconex.vehiclesurvey.analysis;
 
-import java.util.ArrayList;
+import com.aconex.vehiclesurvey.model.Vehicle;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.TreeMap;
-import com.aconex.vehiclesurvey.model.Vehicle;
 
 /**
  *

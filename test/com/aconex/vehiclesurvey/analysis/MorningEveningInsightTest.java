@@ -1,18 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.aconex.vehiclesurvey.analysis;
 
 import com.aconex.vehiclesurvey.DataReader;
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import org.junit.After;
-import org.junit.AfterClass;
 import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -20,25 +13,7 @@ import org.junit.Test;
  * @author mubarak
  */
 public class MorningEveningInsightTest {
-    
-    public MorningEveningInsightTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
+   
     
     @Test
     public void testGetCountForDuration() throws FileNotFoundException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {

@@ -15,8 +15,8 @@ public class Result {
     
     Class[] analysisClasses = new Class[] {VehicleCountInsight.class} ;
     
-    Object[] daysList;
-    TreeMap<String, ArrayList<Vehicle>> vehicleHash;
+    public Object[] daysList;
+    public TreeMap<String, ArrayList<Vehicle>> vehicleHash;
     
     ArrayList<Vehicle> totalVehicleList = new ArrayList<>();
     

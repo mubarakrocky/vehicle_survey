@@ -1,10 +1,10 @@
 package com.aconex.vehiclesurvey;
 
-import java.util.ArrayList;
-import java.util.ListIterator;
 import com.aconex.vehiclesurvey.model.Direction;
 import com.aconex.vehiclesurvey.model.ReadingPoint;
 import com.aconex.vehiclesurvey.model.Vehicle;
+import java.util.ArrayList;
+import java.util.ListIterator;
 
 /**
  *
